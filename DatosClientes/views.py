@@ -9,25 +9,28 @@ from .serializers import ClienteSerializer
 from django.shortcuts import render
 from django_filters.views import FilterView
 
-
+#Filtro del cliente
 class ClienteFilter(filters.FilterSet):
-    genero = filters.ChoiceFilter(choices=Cliente.GENERO_CHOICES, label="Género")
-    activo = filters.BooleanFilter(field_name='activo', label="Activo")
-    nivel_de_satisfaccion = filters.ChoiceFilter(choices=Cliente.NIVEL_SATISFACCION_CHOICES, label="Nivel de Satisfacción")
+    genero = filters.ChoiceFilter(choices=Cliente.GENERO_CHOICES, label="Género") #Filtra por Genero
+    activo = filters.BooleanFilter(field_name='activo', label="Activo") #Filtra por Activos
+    nivel_de_satisfaccion = filters.ChoiceFilter(choices=Cliente.NIVEL_SATISFACCION_CHOICES, label="Nivel de Satisfacción") #Filtra por nivel de satisfaccion
 
     class Meta:
-        model = Cliente
-        fields = ['genero', 'activo', 'nivel_de_satisfaccion']
+        model = Cliente #toma el cliente modelo
+        fields = ['genero', 'activo', 'nivel_de_satisfaccion'] #Los datos del cliente modelo
 
+#La vista de Cliente
 class ClienteViewSet(viewsets.ModelViewSet):
     queryset = Cliente.objects.all()
     serializer_class = ClienteSerializer
     filter_backends = [DjangoFilterBackend]  # Opcional si está en settings.py
     filterset_class = ClienteFilter
 
+#Def de la lista clientes para que se cargue todo
 def lista_clientes(request):
     clientes = Cliente.objects.all()
     return render(request, 'Cliente/list.html', {'clientes': clientes})
+
 #CLIENTE LISTA
 class ClienteListView(ListView):
     model = Cliente
@@ -49,17 +52,20 @@ class ClienteListView(ListView):
 
         return queryset
 
+#La view envia a crear el cliente
 class ClienteCreateView(CreateView):
     model = Cliente
     fields = '__all__'
     template_name = 'cliente/create.html'
     success_url = reverse_lazy('cliente-list')
+    
 #ACTUALIZAR CLIENTE
 class ClienteUpdateView(UpdateView):
     model = Cliente
     fields = '__all__'
     template_name = 'cliente/update.html'
     success_url = reverse_lazy('cliente-list')
+    
 #BORRAR CLIENTE
 class ClienteDeleteView(DeleteView):
     model = Cliente

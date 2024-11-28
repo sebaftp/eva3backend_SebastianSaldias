@@ -1,12 +1,13 @@
 {% extends "base.html" %}
-
+<!--Titulo bloqueado para que no se desordene de Crear Cliente-->
 {% block title %}Crear Cliente{% endblock %}
 
+<!--Contenido bloqueado para que no se desordene de Crear Cliente-->
 {% block content %}
 <h1 class="mb-4">Crear Cliente</h1>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form.as_p }} <!--Formulario-->
     <button type="submit" class="btn btn-success">Guardar</button>
     <a href="{% url 'cliente-list' %}" class="btn btn-secondary">Cancelar</a>
 </form>

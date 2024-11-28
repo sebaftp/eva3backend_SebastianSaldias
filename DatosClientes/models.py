@@ -1,7 +1,7 @@
 from django.db import models
 
 class Cliente(models.Model):
-    cliente_id = models.CharField(max_length=50, unique=True)
+    cliente_id = models.CharField(max_length=50, unique=True) #El ID
     
     # Definimos las opciones de género
     GENERO_CHOICES = [
@@ -18,17 +18,22 @@ class Cliente(models.Model):
         (5, 'Muy Satisfecho'),
     ]
 
-    edad = models.PositiveSmallIntegerField(help_text="Edad del cliente.")
+    edad = models.PositiveSmallIntegerField(help_text="Edad del cliente.") #Edad del cliente
+    
+    #Genero del cliente
     genero = models.CharField(
         max_length=10, 
         choices=GENERO_CHOICES, 
         help_text="Género del cliente (Masculino, Femenino)."
     )
+    
+    #Saldo del cliente
     saldo = models.DecimalField(
         max_digits=10, 
         decimal_places=2, 
         help_text="Saldo promedio en la cuenta."
     )
+    #Estado de Activo
     activo = models.BooleanField(
         default=True, 
         help_text="Estado de actividad del cliente (1: Activo, 0: Inactivo)."

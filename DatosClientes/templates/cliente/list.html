@@ -1,9 +1,10 @@
 {% extends "base.html" %}
-
+<!--LISTAR CLIENTE-->
 {% block title %}Lista de Clientes{% endblock %}
 
 {% block content %}
 <h1 class="mb-4">Lista de Clientes</h1>
+
 <a href="{% url 'cliente-create' %}" class="btn btn-primary mb-3">Agregar Cliente</a>
 <table class="table table-striped">
     <thead>
